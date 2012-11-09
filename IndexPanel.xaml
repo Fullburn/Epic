@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="EpicProto.IndexPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:epic="clr-namespace:EpicProto">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Label Height="28" Name="filterLabel" VerticalAlignment="Bottom" Width="43">Filter:</Label>
+            <TextBox Name="filter" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="23" Width="400"
+                     TextChanged="filter_TextChanged"/>
+            <StackPanel Margin="10,0,0,0">
+                <CheckBox>tags</CheckBox>
+                <CheckBox>titles</CheckBox>
+            </StackPanel>
+            <Button Width="30" Height="22" Margin="10,0,0,0" Name="HomeToggle" Click="HomeToggle_Click">Go</Button>
+        </StackPanel>
+
+        <StackPanel Background="Beige">
+            <epic:IndexHome x:Name="HomeView" Background="Aquamarine" />
+            <epic:IndexArticle x:Name="ArticleView" Background="Pink" />
+        </StackPanel>
+    </DockPanel>
+    
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+    
+    <UserControl.CommandBindings>
+        <CommandBinding Command="GoToPage" Executed="SelectArticleCommand" >
+        </CommandBinding>
+        
+    </UserControl.CommandBindings>
+</UserControl>

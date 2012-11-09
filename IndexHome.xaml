@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="EpicProto.IndexHome"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <Label FontSize="22" FontWeight="Bold">Global Articles</Label>
+        <TextBox>Calendar | Magic System | History</TextBox>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" ></RowDefinition>
+                <RowDefinition Height="*" ></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" FontSize="22" FontWeight="Bold">Characters</Label>
+            <Label Grid.Row="0" Grid.Column="1" FontSize="22" FontWeight="Bold">Chapters</Label>
+            <Label Grid.Row="0" Grid.Column="2" FontSize="22" FontWeight="Bold">Locations</Label>
+            <ListBox Grid.Row="1" Grid.Column="0" Name="CharacterSearch" ItemsSource="{Binding Path=.}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Hyperlink Command="GoToPage" CommandParameter="{Binding Path=ArticleId}">
+                                <TextBlock Text="{Binding Path=Name}"></TextBlock>
+                            </Hyperlink>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ListBox Grid.Row="1" Grid.Column="1" Name="ChapterSearch" ItemsSource="{Binding Path=.}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Hyperlink Command="GoToPage" CommandParameter="{Binding Path=ArticleId}">
+                                <TextBlock Text="{Binding Path=Name}"></TextBlock>
+                            </Hyperlink>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </StackPanel>
+</UserControl>
