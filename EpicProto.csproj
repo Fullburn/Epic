@@ -70,8 +70,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IndexArticleSection.xaml.cs">
+      <DependentUpon>IndexArticleSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StateManager.cs" />
     <Compile Include="Utilities.cs" />
+    <Page Include="IndexArticleSection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="IndexHome.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

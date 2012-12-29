@@ -21,12 +21,13 @@
     </DockPanel>
     
     <UserControl.Resources>
-
+        <Style TargetType="{x:Type Hyperlink}">
+            <Setter Property="Command" Value="GoToPage" />
+        </Style>
     </UserControl.Resources>
     
     <UserControl.CommandBindings>
         <CommandBinding Command="GoToPage" Executed="SelectArticleCommand" >
         </CommandBinding>
-        
     </UserControl.CommandBindings>
 </UserControl>

@@ -55,8 +55,16 @@ namespace EpicProto
     /// <summary>
     /// Represents a date and time according to a selected CalendarSystem.
     /// </summary>
-    class CalendarTime
-    {   
+    public class CalendarTime
+    {
+        /// <summary>
+        /// Deserialization constructor.
+        /// </summary>
+        public CalendarTime()
+        {
+
+        }
+
         public CalendarTime(int minute, int hour, int dayOfMonth, int month, int year)
         {
             minutes += year * (long)StateManager.Current.Calendar.DaysPerYear;

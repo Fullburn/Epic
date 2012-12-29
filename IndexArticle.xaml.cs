@@ -26,8 +26,13 @@ namespace EpicProto
 
         public void SetArticle(Article article)
         {
-            ArticleTitle.Text = article.Name;
-            ArticleContents.DataContext = article != null ? article.Contents : null;
+            this.ArticleTitle.Text = article.Name;
+            this.Sections.Children.Clear();
+
+            foreach (Article.Section section in article.Contents)
+            {
+                this.Sections.Children.Add(new IndexArticleSection(section));
+            }
         }
     }
 }

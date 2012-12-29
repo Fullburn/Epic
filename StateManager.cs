@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml.Serialization;
+using System.Text.RegularExpressions;
 
 namespace EpicProto
 {
@@ -14,9 +15,7 @@ namespace EpicProto
     [
         XmlInclude(typeof(Character)),
         XmlInclude(typeof(Location)),
-        XmlInclude(typeof(Book)),
-        XmlInclude(typeof(Chapter)),
-        XmlInclude(typeof(Scene)),
+        XmlInclude(typeof(StoryEvent)),
     ]
     public class StateManager
     {
@@ -148,6 +147,31 @@ namespace EpicProto
                 {
                     this.AllStoryEvents.Add((StoryEvent)article);
                 }
+
+                foreach (Article.Section section in article.Contents)
+                {
+                    Match m = Regex.Match(section.Text, StateManager.ArticleTagMatch, RegexOptions.IgnoreCase);
+                    while (m.Success)
+                    {
+                        uint articleId = m.Groups[1].Success ? uint.Parse(m.Groups[1].Value) : 0;
+                        string articleName = m.Groups[m.Groups.Count].Value;
+
+                        if (articleId > 0)
+                        {
+                            article.Links.Add(articleId);
+                        }
+                        else
+                        {
+                            Article ar = StateManager.Current.AllArticles.Where(a => a.Name == m.Groups[2].Value).FirstOrDefault();
+                            if (ar != null)
+                            {
+                                article.Links.Add(ar.ArticleId);
+                            }
+                        }
+
+                        m = m.NextMatch();
+                    }
+                }
             }
         }
 
@@ -158,6 +182,8 @@ namespace EpicProto
 
         static Location CurrentMap { get; set; }
 
-        static Scene CurrentTime { get; set; }
+        static StoryEvent CurrentTime { get; set; }
+
+        private const string ArticleTagMatch = @"\[(?:(?:##)(\d+))?\|?([^\]\n]+)\]";
     }
 }

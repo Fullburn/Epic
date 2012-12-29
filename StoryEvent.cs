@@ -5,36 +5,36 @@ using System.Text;
 
 namespace EpicProto
 {
+    public enum EventType
+    {
+        Book,
+        Chapter,
+        Scene,
+    }
+
     public class StoryEvent : Article
     {
-        int Position { get; set; }
-        CalendarTime startTime { get; set; }
-        CalendarTime endTime { get; set; }
+        public EventType EventType { get; set; }
+        public int Position { get; set; }
+        public CalendarTime StartTime { get; set; }
+        public CalendarTime EndTime { get; set; }
+
+        public uint ParentEvent { get; set; }
+        public List<uint> ChildEvents { get; set; }
+
+        public uint Perspective {
+            get { return _perspective; }
+            set { _perspective = value; }
+        }
+
+        private uint _perspective;
 
         /// <summary>
         /// Constructor used for deserialization.
         /// </summary>
-        public StoryEvent()
+        public StoryEvent() : base()
         {
             //StateManager.Current.AllStoryEvents.Add(this);
         }
-    }
-
-    public class Book : StoryEvent
-    {
-        public List<uint> Chapters { get; set; }
-    }
-
-    public class Chapter : StoryEvent
-    {
-        public uint Perspective { get; set; }
-        public uint Book { get; set; }
-        public List<uint> Scenes { get; set; }
-    }
-
-    public class Scene : StoryEvent
-    {
-        public uint Perspective { get; set; }
-        public uint Chapter { get; set; }
     }
 }

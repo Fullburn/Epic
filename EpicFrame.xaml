@@ -8,7 +8,7 @@
             <MenuItem Header="File">
                 <MenuItem Header="New World" />
                 <MenuItem Header="Load" Command="Open" />
-                <MenuItem Header="SaveAs" Command="SaveAs" />
+                <MenuItem Header="Save As" Command="SaveAs" />
             </MenuItem>
             <MenuItem Header="Article">
                 <MenuItem Header="Scene" />

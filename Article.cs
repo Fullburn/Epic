@@ -7,6 +7,8 @@ namespace EpicProto
 {
     public abstract class Article
     {
+        public const string ArticleIdTag = "##";
+
         public class Section
         {
             public string Heading { get; set; }
@@ -34,7 +36,5 @@ namespace EpicProto
         public uint ArticleId { get; set; }
 
         public List<uint> Links { get; set; }
-
-        private const string ArticleIdTag = "##";
     }
 }
