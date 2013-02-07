@@ -40,6 +40,13 @@ namespace EpicProto
             if (openResult == true)
             {
                 StateManager.Load(open.FileName);
+                Uri filePath = new Uri(StateManager.Current.MainMapPath);
+                this.mapPanel.LoadMap(filePath);
+                this.mapPanel.ClearPins();
+                foreach (Location location in StateManager.Current.AllLocations)
+                {
+                    this.mapPanel.AddPin(location);
+                }
             }
         }
 

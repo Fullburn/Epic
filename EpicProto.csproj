@@ -70,11 +70,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MapLocation.xaml.cs">
+      <DependentUpon>MapLocation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IndexArticleSection.xaml.cs">
       <DependentUpon>IndexArticleSection.xaml</DependentUpon>
     </Compile>
     <Compile Include="StateManager.cs" />
     <Compile Include="Utilities.cs" />
+    <Page Include="MapLocation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="IndexArticleSection.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

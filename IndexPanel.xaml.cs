@@ -42,7 +42,6 @@ namespace EpicProto
             this.ArticleView.Visibility = Visibility.Collapsed;
         }
 
-
         private void SelectArticleCommand(object sender, ExecutedRoutedEventArgs e)
         {
             uint articleId = (uint)e.Parameter;

@@ -24,7 +24,6 @@ namespace EpicProto
         public Article()
         {
             this.Contents = new List<Section>();
-            this.Links = new List<uint>();
             //this.ArticleId = NextId++;
             //StateManager.Current.AllArticles.Add(this);
         }
@@ -34,7 +33,5 @@ namespace EpicProto
         public List<Section> Contents { get; set; }
 
         public uint ArticleId { get; set; }
-
-        public List<uint> Links { get; set; }
     }
 }

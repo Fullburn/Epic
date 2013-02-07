@@ -41,12 +41,18 @@ namespace EpicProto
             this.AllArticles = new List<Article>();
             this.AllCharacters = new List<Character>();
             this.AllStoryEvents = new List<StoryEvent>();
+            this.AllLocations = new List<Location>();
         }
 
         /// <summary>
         /// Calendar system used for interpreting StoryEvent times.
         /// </summary>
         public CalendarSystem Calendar { get; set; }
+
+        /// <summary>
+        /// File location of the main map.
+        /// </summary>
+        public string MainMapPath { get; set; }
 
         /// <summary>
         /// Master table of all articles.
@@ -64,6 +70,12 @@ namespace EpicProto
         /// </summary>
         [XmlIgnore]
         public List<StoryEvent> AllStoryEvents { get; set; }
+
+        /// <summary>
+        /// Tracking subset of all articles that are locations.
+        /// </summary>
+        [XmlIgnore]
+        public List<Location> AllLocations { get; set; }
 
         /// <summary>
         /// Currently selected article used for operations.
@@ -136,6 +148,7 @@ namespace EpicProto
         {
             this.AllCharacters.Clear();
             this.AllStoryEvents.Clear();
+            this.AllLocations.Clear();
 
             foreach (Article article in this.AllArticles)
             {
@@ -147,30 +160,9 @@ namespace EpicProto
                 {
                     this.AllStoryEvents.Add((StoryEvent)article);
                 }
-
-                foreach (Article.Section section in article.Contents)
+                else if (article is Location)
                 {
-                    Match m = Regex.Match(section.Text, StateManager.ArticleTagMatch, RegexOptions.IgnoreCase);
-                    while (m.Success)
-                    {
-                        uint articleId = m.Groups[1].Success ? uint.Parse(m.Groups[1].Value) : 0;
-                        string articleName = m.Groups[m.Groups.Count].Value;
-
-                        if (articleId > 0)
-                        {
-                            article.Links.Add(articleId);
-                        }
-                        else
-                        {
-                            Article ar = StateManager.Current.AllArticles.Where(a => a.Name == m.Groups[2].Value).FirstOrDefault();
-                            if (ar != null)
-                            {
-                                article.Links.Add(ar.ArticleId);
-                            }
-                        }
-
-                        m = m.NextMatch();
-                    }
+                    this.AllLocations.Add((Location)article);
                 }
             }
         }
@@ -180,10 +172,6 @@ namespace EpicProto
         /// </summary>
         static string CurrentFile { get; set; }
 
-        static Location CurrentMap { get; set; }
-
         static StoryEvent CurrentTime { get; set; }
-
-        private const string ArticleTagMatch = @"\[(?:(?:##)(\d+))?\|?([^\]\n]+)\]";
     }
 }

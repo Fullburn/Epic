@@ -16,10 +16,14 @@ using System.Text.RegularExpressions;
 namespace EpicProto
 {
     /// <summary>
-    /// Interaction logic for IndexArticle.xaml
+    /// Display control for a section of an article. Replaces appropriate text tags with hyperlinks.
     /// </summary>
     public partial class IndexArticleSection : UserControl
     {
+        /// <summary>
+        /// Constructor from Article.Section
+        /// </summary>
+        /// <param name="section">Section to be displayed.</param>
         public IndexArticleSection(Article.Section section)
         {
             InitializeComponent();
@@ -34,12 +38,19 @@ namespace EpicProto
                 if (chunk.StartsWith(Article.ArticleIdTag))
                 {
                     Match m = RegexArticle.Match(chunk);
-                    contents.Text = m.Groups[2].Value;
-                    
-                    Hyperlink link = new Hyperlink(contents);
-                    link.CommandParameter = uint.Parse(m.Groups[1].Value);
+                    if (m.Success)
+                    {
+                        contents.Text = m.Groups[ArticleTitleGroup].Value;
 
-                    this.SectionContents.Inlines.Add(link);
+                        Hyperlink link = new Hyperlink(contents);
+                        link.CommandParameter = uint.Parse(m.Groups[ArticleIdGroup].Value);
+
+                        this.SectionContents.Inlines.Add(link);
+                    }
+                    else
+                    {
+                        this.SectionContents.Inlines.Add(contents);
+                    }
                 }
                 else
                 {
@@ -48,7 +59,8 @@ namespace EpicProto
             }
         }
 
-        private static Regex RegexArticle = new Regex(RegexArticleTag);
-        private const string RegexArticleTag = @"##(\d+)\|([^\]]+)";
+        private const int ArticleIdGroup = 1;
+        private const int ArticleTitleGroup = 2;
+        private static Regex RegexArticle = new Regex(Article.ArticleIdTag + @"(\d+)\|([^\]]+)");
     }
 }
