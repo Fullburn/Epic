@@ -64,79 +64,79 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Views\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Constants.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="MapLocation.xaml.cs">
+    <Compile Include="Common\AppConstants.cs" />
+    <Compile Include="Models\Map.cs" />
+    <Compile Include="Views\Controls\MapLocation.xaml.cs">
       <DependentUpon>MapLocation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IndexArticleSection.xaml.cs">
+    <Compile Include="Views\Controls\IndexArticleSection.xaml.cs">
       <DependentUpon>IndexArticleSection.xaml</DependentUpon>
     </Compile>
     <Compile Include="StateManager.cs" />
-    <Compile Include="Utilities.cs" />
-    <Page Include="MapLocation.xaml">
+    <Compile Include="Common\Utilities.cs" />
+    <Page Include="Views\Controls\MapLocation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="IndexArticleSection.xaml">
+    <Page Include="Views\Controls\IndexArticleSection.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="IndexHome.xaml">
+    <Page Include="Views\Controls\IndexHome.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="IndexArticle.xaml">
+    <Page Include="Views\Controls\IndexArticle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="IndexPanel.xaml">
+    <Page Include="Views\Panels\IndexPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EpicFrame.xaml">
+    <Page Include="Views\EpicFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IndexHome.xaml.cs">
+    <Compile Include="Views\Controls\IndexHome.xaml.cs">
       <DependentUpon>IndexHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EpicFrame.xaml.cs">
+    <Compile Include="Views\EpicFrame.xaml.cs">
       <DependentUpon>EpicFrame.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MapPanel.xaml">
+    <Page Include="Views\Panels\MapPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarSystem.cs" />
-    <Compile Include="Character.cs" />
-    <Compile Include="Article.cs" />
-    <Compile Include="StoryEvent.cs" />
-    <Compile Include="IndexArticle.xaml.cs">
+    <Compile Include="Models\CalendarSystem.cs" />
+    <Compile Include="Models\Article\Character.cs" />
+    <Compile Include="Models\Article\Article.cs" />
+    <Compile Include="Models\Article\StoryEvent.cs" />
+    <Compile Include="Views\Controls\IndexArticle.xaml.cs">
       <DependentUpon>IndexArticle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IndexPanel.xaml.cs">
+    <Compile Include="Views\Panels\IndexPanel.xaml.cs">
       <DependentUpon>IndexPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Location.cs" />
-    <Compile Include="MapPanel.xaml.cs">
+    <Compile Include="Models\Article\Location.cs" />
+    <Compile Include="Views\Panels\MapPanel.xaml.cs">
       <DependentUpon>MapPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -162,6 +162,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -93,6 +93,7 @@ namespace EpicProto
             this.AllArticles.Clear();
             this.AllCharacters.Clear();
             this.AllStoryEvents.Clear();
+            this.AllLocations.Clear();
         }
 
         /// <summary>
@@ -107,6 +108,8 @@ namespace EpicProto
 
             StateManager.Current.Index();
             StateManager.CurrentFile = fileName;
+
+            StateManager.OnWorldLoaded();
         }
 
         /// <summary>
@@ -174,10 +177,13 @@ namespace EpicProto
 
         static StoryEvent CurrentTime { get; set; }
 
-        public event LocationAddedHandler LocationAdded;
+        public static event LocationAddedHandler LocationAdded;
+
+        public static event WorldLoadedHandler OnWorldLoaded;
     }
 }
 
+public delegate void WorldLoadedHandler();
 public delegate void LocationAddedHandler(object sender, StateChangeEventArgs e);
 
 public class StateChangeEventArgs : EventArgs

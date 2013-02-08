@@ -27,6 +27,7 @@ namespace EpicProto
         {
             InitializeComponent();
 
+
             this.scaleTransform = new ScaleTransform();
             this.antiScaler = new ScaleTransform();
             this.translateTransform = new TranslateTransform();
@@ -36,11 +37,32 @@ namespace EpicProto
             transformGroup.Children.Add(this.translateTransform);
             this.MapCanvas.RenderTransform = transformGroup;
 
+            // Register events
+            StateManager.OnWorldLoaded += this.MapWorldLoaded;
+
             this.SizeChanged += this.MapSizeChanged;
             this.MouseLeftButtonDown += this.MapLeftMouseDown;
             this.MouseLeftButtonUp += this.MapLeftMouseUp;
             this.MouseMove += this.MapMouseMove;
             this.MouseWheel += this.MapMouseWheel;
+        }
+
+        /// <summary>
+        /// Destructor, unregisters external event subscriptions.
+        /// </summary>
+        ~MapPanel()
+        {
+            StateManager.OnWorldLoaded -= this.MapWorldLoaded;
+        }
+
+        public void MapWorldLoaded()
+        {
+            this.ClearPins();
+            this.LoadMap(StateManager.Current.MainMap);
+            foreach (Location location in StateManager.Current.AllLocations)
+            {
+                this.AddPin(location);
+            }
         }
 
         protected void MapSizeChanged(object sender, EventArgs e)
@@ -136,6 +158,11 @@ namespace EpicProto
             this.mapImage.Source = map.MapImage;
         }
 
+        public void ClearPins()
+        {
+            this.LocationCanvas.Children.Clear();
+        }
+
         public void AddPin(Location location)
         {
             MapLocation ml = new MapLocation(location);
@@ -150,10 +177,7 @@ namespace EpicProto
             this.LocationCanvas.Children.Add(ml);
         }
 
-        public void ClearPins()
-        {
-            this.LocationCanvas.Children.Clear();
-        }
+
 
         /// <summary>
         /// Checks the map image boundaries vs. the panel boundaries. Blocks translation (drag) that would pull past the edge.

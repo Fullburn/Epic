@@ -40,12 +40,6 @@ namespace EpicProto
             if (openResult == true)
             {
                 StateManager.Load(open.FileName);
-                this.mapPanel.LoadMap(StateManager.Current.MainMap);
-                this.mapPanel.ClearPins();
-                foreach (Location location in StateManager.Current.AllLocations)
-                {
-                    this.mapPanel.AddPin(location);
-                }
             }
         }
 
