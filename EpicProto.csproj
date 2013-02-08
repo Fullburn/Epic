@@ -70,6 +70,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="MapLocation.xaml.cs">
       <DependentUpon>MapLocation.xaml</DependentUpon>
     </Compile>

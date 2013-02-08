@@ -58,8 +58,8 @@ namespace EpicProto
             double mapPositionY = (panelPosition.Y - translateTransform.Y) / scaler;
             double mapFractionX = mapPositionX / mapImage.Source.Width;
             double mapFractionY = mapPositionY / mapImage.Source.Height;
-            uint feetX = (uint)(mapFeetX * mapFractionX);
-            uint feetY = (uint)(mapFeetY * mapFractionY);
+            uint feetX = (uint)(StateManager.Current.MainMap.FeetX * mapFractionX);
+            uint feetY = (uint)(StateManager.Current.MainMap.FeetY * mapFractionY);
             Location l = new Location(feetX, feetY);
             this.AddPin(l);
         }
@@ -131,10 +131,9 @@ namespace EpicProto
             }
         }
 
-        public void LoadMap(Uri mapPath)
+        public void LoadMap(Map map)
         {
-            this.mapImage.Source = new BitmapImage(mapPath);
-            //this.MapCanvas.Children.Insert(0, mapImage);
+            this.mapImage.Source = map.MapImage;
         }
 
         public void AddPin(Location location)
@@ -142,8 +141,8 @@ namespace EpicProto
             MapLocation ml = new MapLocation(location);
             TransformGroup elGroup = new TransformGroup();
             TranslateTransform fixPoint = new TranslateTransform();
-            fixPoint.X = (location.FeetX / mapFeetX) * mapImage.Source.Width;
-            fixPoint.Y = (location.FeetY / mapFeetY) * mapImage.Source.Height;
+            fixPoint.X = (location.FeetX / StateManager.Current.MainMap.FeetX) * mapImage.Source.Width;
+            fixPoint.Y = (location.FeetY / StateManager.Current.MainMap.FeetY) * mapImage.Source.Height;
 
             elGroup.Children.Add(antiScaler);
             elGroup.Children.Add(fixPoint);
@@ -215,7 +214,5 @@ namespace EpicProto
         /// </summary>
         private double originX, originY;
 
-        private double mapFeetX = 2200 * 5280;
-        private double mapFeetY = 1600 * 5280;
     }
 }

@@ -52,7 +52,7 @@ namespace EpicProto
         /// <summary>
         /// File location of the main map.
         /// </summary>
-        public string MainMapPath { get; set; }
+        public Map MainMap { get; set; }
 
         /// <summary>
         /// Master table of all articles.
@@ -63,25 +63,25 @@ namespace EpicProto
         /// Tracking subset of all articles that are characters.
         /// </summary>
         [XmlIgnore]        
-        public List<Character> AllCharacters { get; set; }
+        public List<Character> AllCharacters { get; private set; }
 
         /// <summary>
         /// Tracking subset of all articles that are story events.
         /// </summary>
         [XmlIgnore]
-        public List<StoryEvent> AllStoryEvents { get; set; }
+        public List<StoryEvent> AllStoryEvents { get; private set; }
 
         /// <summary>
         /// Tracking subset of all articles that are locations.
         /// </summary>
         [XmlIgnore]
-        public List<Location> AllLocations { get; set; }
+        public List<Location> AllLocations { get; private set; }
 
         /// <summary>
         /// Currently selected article used for operations.
         /// </summary>
         [XmlIgnore]
-        public Article CurrentArticle { get; set; }
+        public Article CurrentArticle { get; private set; }
 
         /// <summary>
         /// Clears all the state data from the state manager.
@@ -173,5 +173,14 @@ namespace EpicProto
         static string CurrentFile { get; set; }
 
         static StoryEvent CurrentTime { get; set; }
+
+        public event LocationAddedHandler LocationAdded;
     }
+}
+
+public delegate void LocationAddedHandler(object sender, StateChangeEventArgs e);
+
+public class StateChangeEventArgs : EventArgs
+{
+
 }
